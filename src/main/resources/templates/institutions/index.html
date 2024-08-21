@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{plantilla/index}">
+<head th:replace="plantilla/index :: head">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instituciones</title>
+</head>
+<body>
+
+<nav th:replace="plantilla/index :: nav" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"></nav>
+
+<div layout:fragment="page-content" class="content">
+    <div class="container mt-5 mb-5" style="width: 80%;position: relative">
+        <div class="section-body">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card table-responsive">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">Instituciones</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="container">
+                                <h1 class="my-4">Lista de Instituciones</h1>
+                                <a th:href="@{/institutions/crear}" class="btn btn-primary mb-3"
+                                   style="background: linear-gradient(to right, #55EC64, #0575B4); border-radius: 5px;color: white;">
+                                    Crear Institución
+                                </a>
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Nombre</th>
+                                            <th>Abreviatura</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="institution : ${institutions}">
+                                            <td th:text="${institution.id}"></td>
+                                            <td th:text="${institution.nombre}"></td>
+                                            <td th:text="${institution.abreviatura}"></td>
+                                            <td>
+                                                <a th:href="@{'/institutions/editar/' + ${institution.id}}" class="btn btn-primary"
+                                                   style="background: linear-gradient(to right, #55EC64, #0575B4); border-radius: 5px;color: white;">
+                                                    Editar
+                                                </a>
+                                                <a th:href="@{'/institutions/eliminar/' + ${institution.id}}" class="btn"
+                                                   style="border-color: #0575B4;">Eliminar</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="plantilla/index :: footer"></footer>
+<th:block layout:fragment="scripts">
+    <!-- Scripts dinámico-->
+</th:block>
+
+</body>
+</html>

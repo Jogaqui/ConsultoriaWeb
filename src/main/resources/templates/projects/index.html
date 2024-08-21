@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{plantilla/index}">
+<head th:replace="plantilla/index :: head">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyectos</title>
+</head>
+<body>
+
+<nav th:replace="plantilla/index :: nav" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"></nav>
+
+<div layout:fragment="page-content" class="content">
+    <div class="container mt-5 mb-5" style="width: 90%; position: relative">
+        <div class="section-body">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card table-responsive">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">Proyectos</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="container">
+                                <h1 class="my-4">Lista de Proyectos</h1>
+                                <div class="row mb-3">
+                                    <div class="col-md-2">
+                                        <select id="institutionFilter" class="form-control" onchange="applyFilters()">
+                                            <option value="">Filtrar por Institución</option>
+                                            <option th:each="institution : ${institutions}"
+                                                    th:value="${institution.id}" th:text="${institution.nombre}"></option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <select id="areaFilter" class="form-control" onchange="applyFilters()">
+                                            <option value="">Filtrar por Área</option>
+                                            <option th:each="area : ${areas}"
+                                                    th:value="${area.id}" th:text="${area.nombre}"></option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <select id="professionFilter" class="form-control" onchange="applyFilters()">
+                                            <option value="">Filtrar por Profesión</option>
+                                            <option th:each="profession : ${professions}"
+                                                    th:value="${profession.id}" th:text="${profession.nombre}"></option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <select id="serviceFilter" class="form-control" onchange="applyFilters()">
+                                            <option value="">Filtrar por Servicio</option>
+                                            <option th:each="service : ${services}"
+                                                    th:value="${service.id}" th:text="${service.denominacion}"></option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="text" id="dniFilter" class="form-control" placeholder="Buscar por DNI" onkeyup="applyFilters()">
+                                    </div>
+                                </div>
+                                <a th:href="@{/projects/crear}" class="btn btn-primary mb-3"
+                                   style="background: linear-gradient(to right, #55EC64, #0575B4); border-radius: 5px;color: white;">
+                                    Crear Proyecto
+                                </a>
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Institución</th>
+                                            <th>Cliente</th>
+                                            <th>Servicio</th>
+                                            <th>Área</th>
+                                            <th>Profesión</th>
+                                            <th>Plan</th>
+                                            <th>Estado de Pago</th>
+                                            <th>Estado de Trabajo</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="projectTableBody">
+                                        <tr th:each="project : ${projects}">
+                                            <td th:text="${project.id}"></td>
+                                            <td th:text="${project.institution.nombre}"></td>
+                                            <td th:text="${project.customer.nombre} + ' ' + ${project.customer.apellidos}"></td>
+                                            <td th:text="${project.servicio.denominacion}"></td>
+                                            <td th:text="${project.area.nombre}"></td>
+                                            <td th:text="${project.profession.nombre}"></td>
+                                            <td th:text="${project.plan}"></td>
+                                            <td th:text="${project.estadoPago}"></td>
+                                            <td th:text="${project.estadoTrabajo}"></td>
+                                            <td>
+                                                <a th:href="@{/projects/editar/{id}(id=${project.id})}" class="btn btn-sm btn-warning">Editar</a>
+                                                <a th:href="@{/projects/eliminar/{id}(id=${project.id})}" class="btn btn-sm btn-danger">Eliminar</a>
+                                                <a th:href="@{/projects/{id}/activities(id=${project.id})}" class="btn btn-sm btn-info">Bitácora</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="plantilla/index :: footer"></footer>
+<th:block layout:fragment="scripts">
+    <!-- Scripts dinámicos -->
+    <script>
+        function applyFilters() {
+            const institutionId = document.getElementById('institutionFilter').value;
+            const areaId = document.getElementById('areaFilter').value;
+            const professionId = document.getElementById('professionFilter').value;
+            const serviceId = document.getElementById('serviceFilter').value;
+            const dni = document.getElementById('dniFilter').value;
+
+            let url = /*[[@{/projects/lista}]]*/ '/projects/lista?';
+
+            if (institutionId) url += 'institution=' + institutionId + '&';
+            if (areaId) url += 'area=' + areaId + '&';
+            if (professionId) url += 'profession=' + professionId + '&';
+            if (serviceId) url += 'service=' + serviceId + '&';
+            if (dni) url += 'dni=' + dni + '&';
+
+            url = url.slice(0, -1); // Remove trailing '&'
+            window.location.href = url;
+        }
+    </script>
+</th:block>
+
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{plantilla/index}">
+<head th:replace="plantilla/index :: head">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Proyecto</title>
+</head>
+<body>
+
+    <nav th:replace="plantilla/index :: nav" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"></nav>
+
+    <div layout:fragment="page-content" class="content">
+        <div class="container mt-5 mb-5" style="width: 80%;position: relative">
+            <div class="section-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card table-responsive">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Crear Proyecto</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="container">
+                                    <form th:action="@{/projects/guardar}" th:object="${project}" method="post">
+                                        <div class="form-group">
+                                            <label for="institution">Institución</label>
+                                            <select th:field="*{institution.id}" class="form-control">
+                                                <option value="" disabled selected>Seleccione una Institución</option>
+                                                <option th:each="institution : ${institutions}"
+                                                        th:value="${institution.id}"
+                                                        th:text="${institution.nombre}"></option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="customer">Cliente</label>
+                                            <select th:field="*{customer.id}" class="form-control">
+                                                <option value="" disabled selected>Seleccione un Cliente</option>
+                                                <option th:each="customer : ${customers}"
+                                                        th:value="${customer.id}"
+                                                        th:text="${customer.nombre} + ' ' + ${customer.apellidos}"></option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="servicio">Servicio</label>
+                                            <select th:field="*{servicio.id}" class="form-control">
+                                                <option value="" disabled selected>Seleccione un Servicio</option>
+                                                <option th:each="servicio : ${services}"
+                                                        th:value="${servicio.id}"
+                                                        th:text="${servicio.denominacion}"></option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="area">Área</label>
+                                            <select th:field="*{area.id}" class="form-control">
+                                                <option value="" disabled selected>Seleccione un Área</option>
+                                                <option th:each="area : ${areas}"
+                                                        th:value="${area.id}"
+                                                        th:text="${area.nombre}"></option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="profession">Profesión</label>
+                                            <select th:field="*{profession.id}" class="form-control">
+                                                <option value="" disabled selected>Seleccione una Profesión</option>
+                                                <option th:each="profession : ${professions}"
+                                                        th:value="${profession.id}"
+                                                        th:text="${profession.nombre}"></option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="plan">Plan</label>
+                                            <input type="text" th:field="*{plan}" class="form-control" placeholder="Plan" required />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="estadoPago">Estado de Pago</label>
+                                            <input type="text" th:field="*{estadoPago}" class="form-control" placeholder="Estado de Pago" required />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="estadoTrabajo">Estado de Trabajo</label>
+                                            <input type="text" th:field="*{estadoTrabajo}" class="form-control" placeholder="Estado de Trabajo" required />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="fechacontacto_ultima">Fecha de Último Contacto</label>
+                                            <input type="date" th:field="*{fechacontactoUltima}" class="form-control" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="linkDrive">Link de Drive</label>
+                                            <input type="text" th:field="*{linkDrive}" class="form-control" placeholder="Link de Drive" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="observaciones">Observaciones</label>
+                                            <textarea th:field="*{observaciones}" class="form-control" placeholder="Observaciones"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="fechaInicio">Fecha de Inicio</label>
+                                            <input type="date" th:field="*{fechaInicio}" class="form-control" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="fechaFin">Fecha de Fin</label>
+                                            <input type="date" th:field="*{fechaFin}" class="form-control" />
+                                        </div>
+                                        <button type="submit" class="btn btn-primary"
+                                                style="background: linear-gradient(to right, #55EC64, #0575B4); border-radius: 5px;color: white;">
+                                            Guardar
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer th:replace="plantilla/index :: footer"></footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const formatDateTime = (dateString) => {
+                const date = new Date(dateString);
+                const year = date.getFullYear();
+                const month = String(date.getMonth() + 1).padStart(2, '0'); // Meses están en el rango 0-11
+                const day = String(date.getDate()).padStart(2, '0');
+                const hours = String(date.getHours()).padStart(2, '0');
+                const minutes = String(date.getMinutes()).padStart(2, '0');
+                const seconds = String(date.getSeconds()).padStart(2, '0');
+                return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+            };
+    
+            const formatDate = (dateString) => {
+                const date = new Date(dateString);
+                const year = date.getFullYear();
+                const month = String(date.getMonth() + 1).padStart(2, '0'); // Meses están en el rango 0-11
+                const day = String(date.getDate()).padStart(2, '0');
+                return `${year}-${month}-${day}`;
+            };
+    
+            const fechaInicioElement = document.getElementById('fechaInicio');
+            const fechaFinElement = document.getElementById('fechaFin');
+            const fechacontactoUltimaElement = document.getElementById('fechacontactoUltima');
+    
+            // Formatear el valor del input si existe
+            if (fechaInicioElement && fechaInicioElement.value) {
+                fechaInicioElement.value = formatDateTime(fechaInicioElement.value);
+            }
+            if (fechaFinElement && fechaFinElement.value) {
+                fechaFinElement.value = formatDateTime(fechaFinElement.value);
+            }
+            if (fechacontactoUltimaElement && fechacontactoUltimaElement.value) {
+                fechacontactoUltimaElement.value = formatDate(fechacontactoUltimaElement.value);
+            }
+        });
+    </script>
+    
+    <th:block layout:fragment="scripts">
+       
+    </th:block>
+    
+    </body>
+    </html>
