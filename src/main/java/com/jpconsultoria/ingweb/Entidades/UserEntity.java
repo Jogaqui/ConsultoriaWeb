@@ -1,53 +1,42 @@
 package com.jpconsultoria.ingweb.Entidades;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.util.HashSet;
 import java.util.Set;
 
-@Data
+@Setter
+@Getter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name = "users")
 public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 60, nullable = false)
-    private String nombreUsuario;
+    @Column(unique = true)
+    private String username;
+    private String password;
 
-    @Column(length = 225, nullable = false)
-    private String contrasena;
+    @Column(name = "is_enabled")
+    private boolean isEnabled;
 
-    @Column(length = 100, nullable = false)
-    private String correo;
+    @Column(name = "account_No_Expired")
+    private boolean accountNoExpired;
 
-    @ManyToOne
-    @JoinColumn(name = "role_id", nullable = false)
-    private Role role;
+    @Column(name = "account_No_Locked")
+    private boolean accountNoLocked;
 
-    @OneToMany(mappedBy = "user")
-    private Set<Advisor> advisors;
+    @Column(name = "credential_No_Expired")
+    private boolean credentialNoExpired;
 
-    @ManyToMany
-    @JoinTable(
-        name = "area_user",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "area_id")
-    )
-    private Set<Area> areas;
-
-    @ManyToMany
-    @JoinTable(
-        name = "project_user",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "project_id")
-    )
-    private Set<Project> projects;
-
-    @OneToMany(mappedBy = "user")
-    private Set<Comment> comments;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<RoleEntity> roles = new HashSet<>();
+    
 }

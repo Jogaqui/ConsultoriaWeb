@@ -4,9 +4,11 @@ import com.jpconsultoria.ingweb.Entidades.UserEntity;
 import java.util.List;
 
 public interface UserService {
-    List<UserEntity> getAllUsers();
-    UserEntity getUserById(Long id);
-    UserEntity createUser(UserEntity user);
-    UserEntity updateUser(Long id, UserEntity user);
-    void deleteUser(Long id);
-}
+  
+  public List<UserEntity> listarClientes();
+  public UserEntity crearCliente(UserEntity cliente);
+  public int save(UserEntity c);
+  public UserEntity obtenerCliente(Long id);
+  public UserEntity actualizarCliente(UserEntity cliente);
+  public void eliminarCliente(Long id);
+
