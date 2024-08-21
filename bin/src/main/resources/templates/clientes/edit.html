@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{plantilla/index}">
+<head th:replace="plantilla/index :: head">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Clientes</title>
+</head>
+<body>
+
+ 
+<nav th:replace="plantilla/index :: nav" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"></nav>
+
+<div layout:fragment="page-content" class="content" >
+
+    <div class="container mt-5 mb-5" style="width: 50%;position: relative">
+        <form th:action="@{/clientes/{id}(id=${cliente.id})}" th:object="${cliente}" method="post">
+        <div class="container">
+            <h1 class="my-4" >Formulario Cliente</h1>
+
+            <div class="form-group">
+                <label for="dni">ID:</label>
+                <input type="text" id="id" th:field="*{id}" class="form-control" disabled>
+            </div>
+                <div class="form-group">
+                    <label for="dni">DNI:</label>
+                    <input type="text" id="dni" th:field="*{dni}" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" th:field="*{nombre}" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="direccion">Dirección:</label>
+                    <input type="text" id="direccion" th:field="*{direccion}" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="telefono">Teléfono:</label>
+                    <input type="text" id="telefono" th:field="*{telefono}" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="background: linear-gradient(to right, #55EC64, #0575B4); border-radius: 5px;color: white;">Guardar</button>
+                <a th:href="@{/clientes/lista}" class="btn" style="border-color: #0575B4;">Cancelar</a>
+        </div>
+    </form>
+
+</div>
+</div>
+
+
+<footer th:replace="plantilla/index :: footer"></footer>
+<th:block layout:fragment="scripts">
+<!-- Scripts dinámico-->
+</th:block>
+    
+</body>
+</html>

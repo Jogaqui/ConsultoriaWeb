@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"></head>
+<body>
+    
+    
+    <form th:action="@{/login}" method="post">
+    <div class="container">
+        <div class="left-panel tittle-superior image-container">
+            <!-- <h1 class="font-big">Bienvenido al sistema de <br>JP Consultoría!</h1> -->
+            <!-- <p class="font-medium">"El éxito es la suma de pequeños esfuerzos repetidos día tras día."</p>
+ -->
+                <img th:src="@{/img/login3.jpg}" alt="Descripción de la imagen">
+                <div class="overlay">
+                    <p class="font-medium">"El éxito es la suma de pequeños esfuerzos repetidos día tras día."</p>
+                </div>
+
+        </div>
+        <div class="right-panel">
+            <div class="login-container">
+                <div class="logo">
+                    <img th:src="@{/img/jpconsultoria_logo.jpg}" alt="jpconsultoria">
+                    <label class="font-big">Consultoría</label>
+                    
+                </div>
+                <hr><br>
+                 <div class="tittle-superior">
+                    <!-- <h2 class="font-big">Bienvenido a JP Consultoría</h2> -->
+                    <div class="font-small">
+                        <p>Inicie sesión con los datos de su cuenta otorgada por la empresa.</p>
+                    </div>
+                </div> 
+
+                <form>
+                    <div class="input-login-group">
+                    <label class="font-small">Nombre de usuario</label>
+                    <input class="font-small" id="username" name="username" type="text" placeholder="Nombre de usuario" required>
+                    </div>
+                    <div class="input-login-group">
+                    <label class="font-small">Contraseña</label>
+                    <input class="font-small" type="password" id="password" name="password"  placeholder="••••••••" required>
+                    </div>
+                    <div class="actions">
+                        <label class="font-super-small inferior-panel">
+                            <input type="checkbox">
+                            Recuérdame
+                        </label>
+                        <a class="font-super-small inferior-panel" href="#">¿Olvidaste tu contraseña?</a>
+                    </div>
+                    <br>
+                    <button type="submit">Iniciar sesión</button>
+                    
+                </form>
+                <!-- <p>New on our platform? <a href="#">Create an account</a></p>
+                <div class="social-login">
+                    <p>or</p>
+                    <div class="social-icons">
+                        <a href="#"><img src="path/to/facebook-icon.png" alt="Facebook"></a>
+                        <a href="#"><img src="path/to/google-icon.png" alt="Google"></a>
+                        <a href="#"><img src="path/to/twitter-icon.png" alt="Twitter"></a>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</form>
+
+
+</body>
+</html>
