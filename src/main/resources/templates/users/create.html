@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{plantilla/index}">
+<head th:replace="plantilla/index :: head">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Usuario</title>
+</head>
+<body>
+
+<nav th:replace="plantilla/index :: nav" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"></nav>
+
+<div layout:fragment="page-content" class="content">
+    <div class="container mt-5 mb-5" style="width: 50%;position: relative">
+        <div class="container">
+            <h1 class="my-4">Formulario Usuario</h1>
+            <form th:action="@{/users/save}" th:object="${user}" method="POST">
+                <div class="form-group">
+                    <label for="nombreUsuario">Nombre de Usuario:</label>
+                    <input type="text" id="nombreUsuario" th:field="*{nombreUsuario}" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="contraseña">Contraseña:</label>
+                    <input type="password" id="contraseña" th:field="*{contraseña}" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="correo">Correo:</label>
+                    <input type="email" id="correo" th:field="*{correo}" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="role">Rol:</label>
+                    <select id="role" th:field="*{role.id}" class="form-control">
+                        <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.nombre}"></option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary"
+                        style="background: linear-gradient(to right, #55EC64, #0575B4); border-radius: 5px;color: white;">
+                    Guardar
+                </button>
+                <a th:href="@{/users/lista}" class="btn" style="border-color: #0575B4;">Cancelar</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="plantilla/index :: footer"></footer>
+<th:block layout:fragment="scripts">
+    <!-- Scripts dinámico-->
+</th:block>
+
+</body>
+</html>

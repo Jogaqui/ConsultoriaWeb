@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{plantilla/index}">
+<head th:replace="plantilla/index :: head">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Proyecto</title>
+</head>
+<body>
+
+<nav th:replace="plantilla/index :: nav" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"></nav>
+
+<div layout:fragment="page-content" class="content">
+    <div class="container mt-5 mb-5" style="width: 50%;position: relative">
+        <form th:action="@{/projects/update/{id}(id=${project.id})}" th:object="${project}" method="post">
+            <div class="container">
+                <h1 class="my-4">Editar Proyecto</h1>
+
+                <div class="form-group">
+                    <label for="id">ID:</label>
+                    <input type="text" id="id" th:field="*{id}" class="form-control" disabled>
+                </div>
+
+                <div class="form-group">
+                    <label for="institution">Institución:</label>
+                    <select id="institution" th:field="*{institution.id}" class="form-control" required>
+                        <option th:each="institution : ${institutions}" th:value="${institution.id}" th:text="${institution.nombre}"></option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="customer">Cliente:</label>
+                    <select id="customer" th:field="*{customer.id}" class="form-control" required>
+                        <option th:each="customer : ${customers}" th:value="${customer.id}" th:text="${customer.nombre}"></option>
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="servicio">Servicio:</label>
+                    <select id="servicio" th:field="*{servicio.id}" class="form-control" required>
+                        <option th:each="servicio : ${servicios}" th:value="${servicio.id}" th:text="${servicio.denominacion}"></option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="area">Área:</label>
+                    <select id="area" th:field="*{area.id}" class="form-control" required>
+                        <option th:each="area : ${areas}" th:value="${area.id}" th:text="${area.nombre}"></option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="profession">Profesión:</label>
+                    <select id="profession" th:field="*{profession.id}" class="form-control" required>
+                        <option th:each="profession : ${professions}" th:value="${profession.id}" th:text="${profession.nombre}"></option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="plan">Plan:</label>
+                    <input type="text" id="plan" th:field="*{plan}" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="estado_pago">Estado de Pago:</label>
+                    <input type="text" id="estado_pago" th:field="*{estadoPago}" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="estado_trabajo">Estado de Trabajo:</label>
+                    <input type="text" id="estado_trabajo" th:field="*{estadoTrabajo}" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="fechacontacto_ultima">Fecha de Último Contacto:</label>
+                    <input type="date" id="fechacontacto_ultima" th:field="*{fechacontactoUltima}" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="link_drive">Link de Drive:</label>
+                    <input type="url" id="link_drive" th:field="*{linkDrive}" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="observaciones">Observaciones:</label>
+                    <textarea id="observaciones" th:field="*{observaciones}" class="form-control"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="fecha_inicio">Fecha de Inicio:</label>
+                    <input type="datetime-local" id="fecha_inicio" th:field="*{fechaInicio}" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="fecha_fin">Fecha de Fin:</label>
+                    <input type="datetime-local" id="fecha_fin" th:field="*{fechaFin}" class="form-control">
+                </div>
+
+                <button type="submit" class="btn btn-primary"
+                        style="background: linear-gradient(to right, #55EC64, #0575B4); border-radius: 5px;color: white;">
+                    Guardar
+                </button>
+                <a th:href="@{/projects/lista}" class="btn" style="border-color: #0575B4;">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<footer th:replace="plantilla/index :: footer"></footer>
+<th:block layout:fragment="scripts">
+    <!-- Scripts dinámicos -->
+</th:block>
+
+</body>
+</html>
