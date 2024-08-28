@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import com.jpconsultoria.ingweb.Entidades.Activity;
 import com.jpconsultoria.ingweb.Entidades.Chapter;
+import com.jpconsultoria.ingweb.Entidades.Customer;
+import com.jpconsultoria.ingweb.Entidades.Area;
 import com.jpconsultoria.ingweb.Entidades.Project;
 import com.jpconsultoria.ingweb.Entidades.Type;
 import com.jpconsultoria.ingweb.Servicios.ProjectServiceImpl;
@@ -105,6 +107,10 @@ public class ProjectController {
         model.addAttribute("project", new Project());
         model.addAttribute("institutions", institutionService.getAllInstitutions());
         model.addAttribute("customers", customerService.getAllCustomers());
+        List<Customer> customers = customerService.getAllCustomers();
+        List<Area> areas = areaService.getAllAreas();
+        System.out.println("Areas: " + areas);
+        System.out.println("Customers: " + customers);
         model.addAttribute("services", serviceService.getAllServices());
         model.addAttribute("areas", areaService.getAllAreas());
         model.addAttribute("professions", professionService.getAllProfessions());
