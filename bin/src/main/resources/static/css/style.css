@@ -1,0 +1,293 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #e4e5e6;
+    
+    
+}
+
+.container {
+    display: flex;
+    max-width: 1000px;
+    width: 100%;
+    height: 600px;
+    background-color: #fff;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    margin: 20px 20px 20px 20px;
+}
+
+
+.right-panel {
+    padding: 2rem;
+}
+
+.left-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #fff;
+    text-align: center;
+
+}
+
+.left-panel h1 {
+   /*  font-size: 1.5rem; */
+    margin-bottom: 1.5rem;
+}
+
+.inferior-panel{
+    color: #666;
+}
+.inferior-panel input{
+    margin-right: 10px;
+}
+
+.inferior-panel label{
+    color: #666;
+}
+
+.right-panel {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+}
+
+.login-container {
+    max-width: 300px;
+    width: 100%;
+    text-align: center;
+}
+
+.logo {
+    width: 100%;
+    height: 2rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo img {
+    max-width: 100%; /* Asegura que la imagen no sobrepase el tamaño del contenedor */
+    max-height: 100%;
+    margin-right: 10px;
+}
+.logo label{
+    color: #474747;
+    font-weight: 500;
+    /* background: linear-gradient(to right, #59F160, #0575B4);
+    -webkit-background-clip: text; 
+    color: transparent; */
+
+}
+
+h2 {
+    margin-bottom: 1rem;
+}
+
+form input {
+    width: 100%;
+    padding: 0.75rem;
+    margin: 0.5rem 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.actions label {
+    display: flex;
+    align-items: center;
+}
+
+.actions a {
+    color: #0575B4;
+    text-decoration: none;
+}
+
+button {
+    width: 100%;
+    padding: 0.75rem;
+    background: #1c1b1b;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    font-family: "Roboto Condensed", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500; 
+    font-style:normal;
+    font-size: 1rem; 
+    transition: outline 1s ease;
+}
+
+button:hover {
+    /* opacity: 0.9; */
+    background: linear-gradient(to right, #55EC64, #0575B4);
+    outline: 1px solid #1c1b1b;
+}
+
+
+.social-login {
+    text-align: center;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.social-icons a img {
+    width: 30px;
+    height: 30px;
+}
+
+.font-big{
+font-family: "Roboto Condensed", sans-serif;
+font-optical-sizing: auto;
+font-weight: 700;
+font-style: normal;
+font-size: 1.5rem;
+
+}
+
+
+.font-medium{
+    font-family: "Roboto Condensed", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500; 
+    font-style:normal;
+    font-size: 1rem; 
+     
+}
+
+
+.font-small{
+ 
+    font-family: "Roboto Condensed", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 100;
+    font-style:normal;
+    font-size: 0.9rem;
+}
+
+.font-small p{
+    color: #999999;
+ 
+}
+
+.font-super-small{
+    font-family: "Roboto Condensed", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style:normal;
+    font-size: 0.7rem;
+}
+.input-login-group{
+    text-align: left;
+}
+
+.input-login-group label{
+    font-weight: 500;
+    color: #474747;
+
+}
+.input-login-group input{
+    font-weight: 100;
+}
+
+/* .tittle-superior{
+    text-align: left;
+
+} */
+.tittle-superior div{
+    margin: 30px 0 30px 0;
+
+}
+.image-container {
+    position: relative; /* Necesario para posicionar elementos hijos relativamente */
+    width: 100%; /* Ajusta el ancho del contenedor al 100% del contenedor padre */
+    max-width: 100%; /* Asegura que la imagen no se extienda más allá de su tamaño original */
+    /* overflow: hidden; */ /* Para asegurar que la imagen no se desborde si es más grande */
+  }
+  
+  .image-container img {
+    display: block; /* Asegura que la imagen se muestre como un bloque */
+    width: 100%; /* Ajusta la anchura de la imagen al 100% del contenedor */
+    height: auto; /* Ajusta la altura automáticamente para mantener la proporción */
+  }
+  
+  .overlay {
+    position: absolute; /* Posiciona el contenido encima de la imagen */
+    top: 50%; /* Coloca el contenido en el centro verticalmente */
+    left: 50%; /* Coloca el contenido en el centro horizontalmente */
+    transform: translate(-50%, -50%); /* Centra el contenido correctamente */
+    text-align: center; /* Alinea el texto al centro */
+    width: 100%; /* Ajusta el ancho al 100% del contenedor */
+  }
+  
+  .overlay p {
+    
+    font-size: 20px; /* Tamaño de la fuente */
+    /* Otros estilos adicionales según necesites */
+    font-weight: 400;
+    margin: -50px 40px 0 40px;
+    color: #fff;
+    
+  }
+  
+
+
+
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .left-panel{
+        display: none;
+    } 
+    .right-panel {
+        width: 100%;
+    }
+    .image-container img {
+        display: none;
+       
+      }
+    .overlay p {
+    
+        margin: 20px 40px 20px 40px;
+      }
+      .container {
+        display: flex;
+        max-width: 1000px;
+        width: 100%;
+        height: 500px;
+        background-color: #fff;
+        box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        margin: 20px 20px 20px 20px;
+    }
+    
+
+}

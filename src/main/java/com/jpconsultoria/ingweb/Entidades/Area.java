@@ -19,8 +19,8 @@ public class Area {
     @Column(length = 60)
     private String nombre;
 
-    @ManyToMany(mappedBy = "areas")
-    private Set<UserEntity> users;
+//    @ManyToMany(mappedBy = "areas")
+//    private Set<UserEntity> users;
 
     @OneToMany(mappedBy = "area")
     private Set<Project> projects;

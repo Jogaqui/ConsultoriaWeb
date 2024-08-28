@@ -1,18 +1,18 @@
 -- Insertar datos en la tabla role
-INSERT INTO role (id, nombre) VALUES
-(1, 'Administrador'),
-(2, 'Gerente General'),
-(3, 'Gerente Departamento'),
-(4, 'Jefe de Calidad'),
-(5, 'Asesor');
+--INSERT INTO role (id, nombre) VALUES
+--(1, 'Administrador'),
+--(2, 'Gerente General'),
+--(3, 'Gerente Departamento'),
+--(4, 'Jefe de Calidad'),
+--(5, 'Asesor');
 
 -- Insertar datos en la tabla user_entity
-INSERT INTO user_entity (id, role_id, nombre_usuario, correo, contrasena) VALUES
-(1, 1, 'administrador', 'admin@gmail.com', '12345678'),
-(2, 2, 'Jessica Córdova', 'jcordova@gmail.com', '12345678'),
-(3, 3, 'Lucila Briceño', 'lbriceno@gmail.com', '12345678'),
-(4, 4, 'Alexandra Rodríguez', 'arodriguez@gmail.com', '12345678'),
-(5, 5, 'David Vigo', 'dvigo@gmail.com', '12345678');
+--INSERT INTO user_entity (id, role_id, nombre_usuario, correo, contrasena) VALUES
+--(1, 1, 'administrador', 'admin@gmail.com', '12345678'),
+--(2, 2, 'Jessica Córdova', 'jcordova@gmail.com', '12345678'),
+--(3, 3, 'Lucila Briceño', 'lbriceno@gmail.com', '12345678'),
+--(4, 4, 'Alexandra Rodríguez', 'arodriguez@gmail.com', '12345678'),
+--(5, 5, 'David Vigo', 'dvigo@gmail.com', '12345678');
 
 -- Insertar datos en la tabla area
 INSERT INTO area (nombre) VALUES 

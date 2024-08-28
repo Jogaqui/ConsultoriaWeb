@@ -75,12 +75,12 @@
     </div>
     <ul class="nav">
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" style="background: linear-gradient(to right, #55EC64, #0575B4); border-radius: 5px; color: white;" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administrador</a>
-            <div class="dropdown-menu">
-                <form th:action="@{/logout}" method="post">
-                    <button class="dropdown-item" style="background-color: white;" type="submit">Salir</button>
-                </form>
-            </div>
+          <a class="nav-link dropdown-toggle" style="background: linear-gradient(to right, #55EC64, #0575B4); border-radius: 5px;color: white;" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" th:text="${#authentication.name}"></a>
+          <div class="dropdown-menu">
+            <form th:action="@{/logout}" method="post">
+              <button class="dropdown-item" style="background-color: white;" type="submit">Salir</button>
+            </form>
+          </div>
         </li>
     </ul>
 </nav>
