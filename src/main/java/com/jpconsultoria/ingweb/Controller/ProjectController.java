@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,8 +19,12 @@ import com.jpconsultoria.ingweb.Servicios.ProjectServiceImpl;
 import com.jpconsultoria.ingweb.Servicios.InstitutionServiceImpl;
 import com.jpconsultoria.ingweb.Servicios.CustomerServiceImpl;
 import com.jpconsultoria.ingweb.Servicios.ServicioServiceImpl;
+
+import jakarta.validation.Valid;
+
 import com.jpconsultoria.ingweb.Servicios.ActivityService;
 import com.jpconsultoria.ingweb.Servicios.AreaServiceImpl;
+import com.jpconsultoria.ingweb.Servicios.ChapterService;
 import com.jpconsultoria.ingweb.Servicios.ProfessionServiceImpl;
 
 import java.text.SimpleDateFormat;
@@ -50,8 +55,11 @@ public class ProjectController {
     @Autowired
     private ProfessionServiceImpl professionService;
 
-     @Autowired
+    @Autowired
     private ActivityService activityService;
+
+    @Autowired
+    private ChapterService chapterService;
 
     // Método para mostrar la vista de bitácora de actividades
     @GetMapping("/{projectId}/activities")
@@ -68,22 +76,29 @@ public class ProjectController {
     public String showNewActivityForm(@PathVariable Long projectId, Model model) {
         Activity activity = new Activity();
         List<Type> types = activityService.findAllTypes();
-        List<Chapter> chapters = activityService.findAllChapters();
+        List<Chapter> chapters = chapterService.getAllChapters();
         model.addAttribute("activity", activity);
         model.addAttribute("types", types);
         model.addAttribute("chapters", chapters);
         model.addAttribute("projectId", projectId);
-        return "activities/new";
+        return "activities/create";
     }
 
     // Método para guardar la nueva actividad
     @PostMapping("/{projectId}/activities/save")
-    public String saveActivity(@PathVariable Long projectId, @ModelAttribute Activity activity) {
-        Project project = projectService.getProjectById(projectId);
-        activity.setProject(project);
-        activityService.createActivity(activity);
-        return "redirect:/projects/" + projectId + "/activities";
+    public String saveActivity(@PathVariable Long projectId, @ModelAttribute @Valid Activity activity, BindingResult result, Model model) {
+    if (result.hasErrors()) {
+        model.addAttribute("types", activityService.findAllTypes());
+        model.addAttribute("chapters", activityService.findAllChapters());
+        model.addAttribute("projectId", projectId);
+        return "activities/new";
     }
+    Project project = projectService.getProjectById(projectId);
+    activity.setProject(project);
+    activityService.createActivity(activity);
+    return "redirect:/projects/" + projectId + "/activities";
+    }
+
 
     @GetMapping("/lista")
     public String listProjects(Model model,
@@ -161,8 +176,8 @@ public class ProjectController {
         return "redirect:/projects/lista";
     }
 
-/*     @PostMapping("/actualizar/{id}")
-public String updateProject(@PathVariable("id") Long id,
+    @PostMapping("/update/{id}")
+    public String updateProject(@PathVariable("id") Long id,
                             @ModelAttribute("project") Project project,
                             @RequestParam(name = "institution.id") Long institutionId,
                             @RequestParam(name = "customer.id") Long customerId,
@@ -190,10 +205,10 @@ public String updateProject(@PathVariable("id") Long id,
     existingProject.setProfession(professionService.getProfessionById(professionId));
 
     // Guardar los cambios
-    projectService.updateProject(existingProject);
+    projectService.updateProject(id, existingProject);
 
     return "redirect:/projects/lista";
-} */
+}
 
 
     @GetMapping("/eliminar/{id}")

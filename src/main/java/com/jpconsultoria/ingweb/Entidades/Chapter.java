@@ -21,4 +21,6 @@ public class Chapter {
 
     @OneToMany(mappedBy = "chapter")
     private Set<Activity> activities;
+
+    
 }

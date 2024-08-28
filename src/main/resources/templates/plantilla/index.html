@@ -31,7 +31,7 @@
             <img th:src="@{/img/jpconsultoria_logo.jpg}" alt="jpconsultoria" style="width: 30px; height: 30px;">
         </div>
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item dropdown">
+           <!--  <li class="nav-item dropdown">
               <button class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                 Usuarios
               </button>
@@ -39,7 +39,7 @@
                   <li><a class="dropdown-item" th:href="@{/users/lista}">Lista de usuarios</a></li>
                   <li><a class="dropdown-item" th:href="@{/roles/lista}">Roles</a></li>
               </ul>
-          </li>
+          </li> -->
             <li class="nav-item dropdown">
                 <button class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                     Administración
@@ -59,8 +59,7 @@
                     Producción
                 </button>
                 <ul class="dropdown-menu dropdown-menu-dark">
-                    <li><a class="dropdown-item" href="#">Asesores</a></li>
-                    <li><a class="dropdown-item" href="#">Jefes de Calidad</a></li>
+                   
                     <li><a class="dropdown-item" th:href="@{/clientes/lista}">Clientes</a></li>
                     <li><a class="dropdown-item" th:href="@{/projects/lista}">Proyectos</a></li>
                 </ul>
